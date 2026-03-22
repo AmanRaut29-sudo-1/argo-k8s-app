@@ -1,4 +1,20 @@
 create kubernetes cluster with three nodes :- 
    kind create cluster --config=cluster.yaml --name=my-cluster.yaml
 
-  
+create namespace :- 
+   create namespace of argocd
+
+to access argocd admin ui :- 
+    kubectl get secret -n argocd argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo
+
+to patch the service form clusterip to nodeport :- 
+     kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort"}}'
+
+port forward the argocd server :-
+   kubectl port-forward svc/argocd-server -n argocd 8080:443
+
+Create a token for dashboard access of k8s:- 
+   kubectl get secret -n argocd argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo
+
+port forward the k8s to see the dashboard  :-
+     k port-forward svc/kubernetes-dashboard    -n kubernetes-dashboard 8091:443 &
