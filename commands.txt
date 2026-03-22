@@ -1,0 +1,4 @@
+create kubernetes cluster with three nodes :- 
+   kind create cluster --config=cluster.yaml --name=my-cluster.yaml
+
+  
